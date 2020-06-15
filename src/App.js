@@ -2,12 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import HeaderBar from "./components/HeaderBar";
+import LoanCalculator from "./components/LoanCalculator";
 
 function App() {
   return (
-    <div className="App">
-      <HeaderBar/>
-    </div>
+      <div>
+          <HeaderBar />
+
+          <LoanCalculator/>
+      </div>
   );
 }
 
