@@ -6,11 +6,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
-
 import ApartmentIcon from '@material-ui/icons/Apartment';
-import {Copyright} from "@material-ui/icons";
 import Box from "@material-ui/core/Box";
+import Copyright from "./Copyright";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -109,7 +107,7 @@ const LoanCalculator = () => {
                 </Avatar>
 
                 <Typography component="h1" variant="h5">
-                    Loan Calculator
+                    대출계산기
                 </Typography>
 
                 <form className={classes.form} noValidate>
@@ -207,6 +205,10 @@ const LoanCalculator = () => {
 
                 </form>
             </div>
+
+            <Box mt={8}>
+                <Copyright />
+            </Box>
         </Container>
     );
 }
