@@ -9,6 +9,10 @@ import Button from "@material-ui/core/Button";
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import Box from "@material-ui/core/Box";
 import Copyright from "./Copyright";
+import Slider from '@material-ui/core/Slider';
+import Grid from "@material-ui/core/Grid";
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from "@material-ui/lab/AlertTitle";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,10 +39,14 @@ const LoanCalculator = () => {
     const classes = useStyles();
 
     const [inputs, setInputs] = useState({
-        amount: '',
-        period: '',
-        rate: '',
-        result: ''
+        // amount: '',
+        // period: '',
+        // rate: '',
+        // result: '',
+        amount: '4.0',
+        period: '30',
+        rate: '2.7',
+        result:'',
     });
     const {amount, period, rate, result} = inputs;
 
@@ -54,9 +62,9 @@ const LoanCalculator = () => {
     const onReset = () => {
         //setText('');
         setInputs({
-            amount: '1.0',
-            period: '1',
-            rate: '3',
+            amount: '4.0',
+            period: '30',
+            rate: '2.7',
             result:'',
         });
     };
@@ -97,6 +105,23 @@ const LoanCalculator = () => {
         });
     }
 
+    const handleChange = name => (e, value) => {
+        //console.log('handleChange v=' + value + ' name='+name);
+
+        setInputs({
+            ...inputs,
+            [name]: value
+        });
+    };
+
+    function valuetext(value) {
+        console.log(value);
+        // setInputs({
+        //     ...inputs,
+        //     amount: value
+        // });
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -125,6 +150,19 @@ const LoanCalculator = () => {
                         onChange={onChange}
                     />
 
+                    <Slider
+                        defaultValue={1.0}
+                        //getAriaValueText={valuetext}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="auto"
+                        step={0.1}
+                        min={0.1}
+                        max={10.0}
+                        value={amount}
+                        onChange={handleChange("amount")}
+                        // valueLabelDisplay="on"
+                    />
+
 
                     {/*<Grid container spacing={3}>*/}
                     {/*    <Grid item xs={3}>*/}
@@ -140,7 +178,6 @@ const LoanCalculator = () => {
                     {/*</Grid>*/}
 
 
-
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -154,17 +191,54 @@ const LoanCalculator = () => {
                         onChange={onChange}
                     />
 
+                    <Slider
+                        defaultValue={30}
+                        //getAriaValueText={valuetext}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="auto"
+                        step={5}
+                        min={5}
+                        max={30}
+                        value={period}
+                        onChange={handleChange("period")}
+                        // valueLabelDisplay="on"
+                    />
+
+                    {/*<Grid*/}
+                    {/*    container*/}
+                    {/*    direction="row"*/}
+                    {/*    justify="space-evenly"*/}
+                    {/*    alignItems="center"*/}
+                    {/*>*/}
+                    {/*        <Button variant="outlined" value="10" onClick={handleChange("period")}>10년</Button>*/}
+                    {/*        <Button variant="outlined">20년</Button>*/}
+                    {/*        <Button variant="outlined">30년</Button>*/}
+                    {/*</Grid>*/}
+
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
                         name="rate"
-                        label="이율"
+                        label="이율(년)"
                         id="rate"
                         autoComplete="rate"
                         value={rate}
                         onChange={onChange}
+                    />
+
+                    <Slider
+                        defaultValue={2.7}
+                        //getAriaValueText={valuetext}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="auto"
+                        step={0.1}
+                        min={0.1}
+                        max={5.0}
+                        value={rate}
+                        onChange={handleChange("rate")}
+                        // valueLabelDisplay="on"
                     />
 
                     {/*<FormControl component="fieldset">*/}
@@ -198,12 +272,30 @@ const LoanCalculator = () => {
                         초기화
                     </Button>
 
-
-                    <Typography component="h1" variant="h5">
-                        {result}
-                    </Typography>
-
                 </form>
+
+                <Box component="span" m={2}>
+
+                </Box>
+
+
+                {result &&
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-evenly"
+                        alignItems="center"
+                    >
+                        <Alert severity="warning">
+                            <Typography component="h1" variant="h4">
+                                {result}
+                            </Typography>
+                        </Alert>
+
+                    </Grid>
+                }
+
+
             </div>
 
             <Box mt={8}>
